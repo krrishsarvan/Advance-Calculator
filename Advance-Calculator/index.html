@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advance Calculator</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #ff0080;
+      text-shadow: 0 0 10px #ff0080;
+    }
+    .calculator {
+      background: #222;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,0,128,0.4);
+      width: 320px;
+    }
+    #display {
+      width: 100%;
+      height: 60px;
+      font-size: 22px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #333;
+      color: #fff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      height: 60px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #444;
+      color: white;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #ff0080;
+    }
+    .equal-btn {
+      grid-column: span 4;
+      background: linear-gradient(45deg, #ff0080, #4facfe);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1> Final Year Project </h1>
+
+  <div class="calculator">
+    <div id="display">0</div>
+    <div class="buttons">
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('/')">÷</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('*')">×</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('-')">−</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="append('+')">+</button>
+
+      <button class="equal-btn" onclick="funnyCalculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    const funnySteps = [
+      "Quantum computing",
+      "Consulting aliens 👽",
+      "Asking my mom",
+      "Rolling dice 🎲",
+      "Checking horoscope 🔮",
+      "Connecting super computer",
+      "Analysing weather 🌩️",
+      "Asking ChatGPT",
+      
+    ];
+
+    const funnyResults = [
+      "42 (obviously)",
+      "Chala ja bsdk",
+      "Khud kar le",
+      "404 Result Not Found",
+      "Infinity 🤯",
+      "System Hang (lol)",
+      "7 - Thala for a reason",
+      "69 😏",
+      "🖕"
+    ];
+
+    let input = "";
+
+    function append(value) {
+      if (display.innerText === "0" || display.innerText.startsWith("Result")) {
+        display.innerText = "";
+        input = "";
+      }
+      input += value;
+      display.innerText = input;
+    }
+
+    function clearDisplay() {
+      input = "";
+      display.innerText = "0";
+    }
+
+    function funnyCalculate() {
+      let step = funnySteps[Math.floor(Math.random() * funnySteps.length)];
+      display.innerText = step;
+
+      // dots animation manually
+      let dots = "";
+      let dotInterval = setInterval(() => {
+        dots = dots.length < 3 ? dots + "." : "";
+        display.innerText = step + dots;
+      }, 500);
+
+      setTimeout(() => {
+        clearInterval(dotInterval);
+        let result = funnyResults[Math.floor(Math.random() * funnyResults.length)];
+        display.innerText = "Result: " + result;
+        input = "";
+      }, 3000); // 3 sec delay
+    }
+  </script>
+</body>
+</html>
